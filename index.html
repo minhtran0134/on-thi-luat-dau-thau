@@ -4422,12 +4422,8 @@ function startNewQuiz() {
     selectedRaw = selectedRaw.concat(extra);
   }
 
-  // Cập nhật câu hỏi và ĐẢO ĐÁP ÁN
-  questions = selectedRaw.map(q => {
-    const correctText = q.options[q.correct];
-    const shuffledOpts = shuffle([...q.options]);
-    return { ...q, options: shuffledOpts, correct: shuffledOpts.indexOf(correctText) };
-  });
+  // Cập nhật câu hỏi giữ nguyên thứ tự đáp án
+  questions = selectedRaw.map(q => ({ ...q }));
 
   localStorage.setItem('quiz_seen_all', JSON.stringify([...new Set([...seenIds, ...questions.map(q => q.id)])]));
 
